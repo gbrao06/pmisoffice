@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"> 
+
+<h:body>
+<ui:composition template="/WEB-INF/template/template.xhtml">
+	
+	<ui:define name="header"/>
+	    
+	<ui:define name="content">
+	<h:form>
+		<p:tabView id="tabView" dynamic="true" cache="true">  
+  
+        <p:tab id="tab1" title="Projects">  
+            <h:panelGrid columns="1" cellpadding="0">    
+            <ui:include src="all_projects.xhtml"/>
+            </h:panelGrid>
+              
+        </p:tab>  
+  
+        <p:tab id="tab2" title="Tasks">  
+        <h:panelGrid columns="1" cellpadding="0">
+              <ui:include src="project_wbs_tasks.xhtml"/>
+              </h:panelGrid>
+        </p:tab>  
+  
+        <p:tab id="tab3" title="create new project">  
+            <h:panelGrid columns="1" cellpadding="0">    
+            <ui:include src="add_project.xhtml"/>
+            </h:panelGrid>       
+        </p:tab>  
+		 <p:tab id="tab7" title="create user">  
+            <h:panelGrid columns="1" cellpadding="0">    
+            <ui:include src="add_user.xhtml"/>
+            </h:panelGrid>              
+        </p:tab>  
+         <p:tab id="tab10" title="add Billable">  
+            <h:panelGrid columns="1" cellpadding="0">    
+            <ui:include src="add_resource_to_project.xhtml"/>
+            </h:panelGrid>              
+        </p:tab>  
+                
+  		   <p:tab id="tab4" title="create new task">  
+            <h:panelGrid columns="1" cellpadding="0">    
+            <ui:include src="add_task.xhtml"/>
+            </h:panelGrid>             
+        </p:tab>  
+        
+           <p:tab id="tab5" title="create wbs item">  
+            <h:panelGrid columns="1" cellpadding="0">    
+            <ui:include src="add_wbs.xhtml"/>
+            </h:panelGrid>              
+        </p:tab>  
+        
+         <p:tab id="tab6" title="create bulk Wbs">  
+            <h:panelGrid columns="1" cellpadding="0">    
+            <ui:include src="add_wbs_tree.xhtml"/>
+            </h:panelGrid>              
+        </p:tab>  
+
+
+         <p:tab id="tab8" title="project graphs">  
+            <h:panelGrid columns="1" cellpadding="0">    
+            
+            </h:panelGrid>              
+        </p:tab>  
+  
+    </p:tabView>  
+    </h:form>	
+	</ui:define>
+	<ui:define name="footer"/>
+	</ui:composition>
+	</h:body>
+</html>

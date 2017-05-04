@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"> 
+
+<ui:composition template="/WEB-INF/template/template.xhtml">
+	
+	<ui:define name="header"/>
+	
+	<ui:define name="content">
+
+	
+		<h:form id="form">  
+  		<p:panelGrid columns="1">
+  		<h:outputText value="WBS" style="background-color:#2F4F4F;color:white"></h:outputText>
+  		
+  		</p:panelGrid>	
+  		<p:panelGrid columns="2">
+  		
+  			<h:outputText id="ProjectId" value="Select Project Id:" style="font-weight:bold" />
+  				<p:selectOneMenu value="#{WbsTreeWebBean.project_id}" update=":form:wbsPanel">
+			    	<f:selectItems value="#{ProjectWebBean.getProjectListBigInts()}"  />
+			    		<p:ajax render="@form" execute="@form"></p:ajax>
+			        				    	
+				</p:selectOneMenu>
+				
+		  	
+		</p:panelGrid>	
+		
+	<p:outputPanel id="wbsPanel">
+  				
+		<h:panelGrid columns="2">  
+		    <p:panel header="Export All Data">  
+		        <h:commandLink>  
+		            <p:graphicImage value="/WEB-INF/images/excel_img.png" />  
+		            <p:dataExporter type="xls" target="wbsTbl" fileName="wbs" />  
+		        </h:commandLink>  
+		  
+		        <h:commandLink>  
+		            <p:graphicImage value="/WEB-INF/pdf_img.png" />  
+		            <p:dataExporter type="pdf" target="wbsTbl" fileName="wbs"/>  
+		        </h:commandLink>  
+		          
+		        <h:commandLink>  
+		            <p:graphicImage value="/WEB-INF/images/csv_img.png" />  
+		            <p:dataExporter type="csv" target="wbsTbl" fileName="wbs" />  
+		        </h:commandLink>  
+		          
+		        <h:commandLink>  
+		            <p:graphicImage value="/WEB-INF/images/xml_img.png" />  
+		            <p:dataExporter type="xml" target="wbsTbl" fileName="wbs" />  
+		        </h:commandLink>  
+		    </p:panel>
+		    	</h:panelGrid>
+   		<p:treeTable id="wbsTbl" value="#{WbsTreeWebBean.root}" var="wbs"  
+                  selection="#{WbsTreeWebBean.selectedNode}" selectionMode="single">  
+  
+  	
+        <f:facet name="header">  
+            Create Work Breakdown Structure:   
+        </f:facet>  
+        
+        <p:column style="width:10px">  
+            <f:facet name="header">  
+                WbsId  
+            </f:facet>      
+            <p:inplace emptyLabel="Select" effectSpeed="fast">
+        
+        <p:inputText value="#{wbs.wbs_id}" ></p:inputText>
+	    </p:inplace>
+        </p:column>  
+        
+        <p:column style="width:10px">  
+            <f:facet name="header">  
+                projectId  
+            </f:facet>  
+        
+            
+        <h:outputText id="ProjectId" value="#{wbs.project_id}" style="font-weight:bold" />
+        
+        </p:column>  
+        <p:column style="width:50px">  
+            
+            <f:facet name="header">  
+                TaskName.  
+            </f:facet>  
+            <p:inplace emptyLabel="Select" effectSpeed="fast">
+                
+            <p:inputText value="#{wbs.task_name}" >  
+    
+            </p:inputText> 
+             </p:inplace> 
+        </p:column>  
+    
+    <p:column style="width:50px">  
+            
+            <f:facet name="header">  
+                priority  
+            </f:facet>  
+            <p:inplace emptyLabel="Select" effectSpeed="fast">
+                
+            <p:inputText value="#{wbs.priority}" >  
+    
+            </p:inputText> 
+             </p:inplace> 
+        </p:column>  
+        	
+        <p:column style="width:50px">  
+            
+            <f:facet name="header">  
+                Assign To  
+            </f:facet>  
+             <p:selectOneMenu value="#{wbs.user_name}">
+		    	<f:selectItems value="#{UserWebBean.getAllUserIDs()}" />
+			</p:selectOneMenu>
+			
+        </p:column>  
+        
+      <p:column style="width:50px">  
+            
+            <f:facet name="header">  
+                effortsPerDay  
+            </f:facet>  
+            <p:inplace emptyLabel="Select" effectSpeed="fast">
+    
+           <p:inputText value="#{wbs.effortsPerDay}">
+           <f:ajax event="keyup" update="idEffortsPlanned" listener="#{wbs.calculateHoursEstimated()}"></f:ajax>
+	
+            
+			</p:inputText>
+			</p:inplace>
+                
+        </p:column>
+          
+        <p:column style="width:50px">  
+            
+            <f:facet name="header">  
+                effortsEstimated  
+            </f:facet>  
+           
+           <h:outputText id="idEffortsPlanned" value="#{wbs.hoursEstimated}" >
+           
+			</h:outputText>
+			
+        </p:column>
+          
+        <p:column style="width:50px">  
+             
+            <f:facet name="header">  
+                plannedStart  
+            </f:facet>  
+          <p:inplace effectSpeed="fast" emptyLabel="Select">
+           
+			<p:calendar value="#{wbs.startEstimate}" id="popupCal1">
+			
+			<p:ajax event="keyup" update="idEffortsPlanned" listener="#{wbs.calculateHoursEstimated()}"></p:ajax>
+	
+                
+			</p:calendar>
+      	</p:inplace>
+            
+        </p:column>  
+        <p:column style="width:50px">  
+                
+            <f:facet name="header">  
+                plannedEnd  
+            </f:facet>  
+        <p:inplace effectSpeed="fast" emptyLabel="select">
+             
+			<p:calendar value="#{wbs.endEstimate}" id="popupCal2" >
+	
+            
+			<p:ajax event="keyup" update="idEffortsPlanned" listener="#{wbs.calculateHoursEstimated()}"></p:ajax>
+			
+			</p:calendar>    
+      	</p:inplace>
+            
+        </p:column>  
+      
+      <p:column style="width:30px">  
+              
+            <f:facet name="header">  
+                actualStart  
+            </f:facet>  
+         <p:inplace emptyLabel="Select" effectSpeed="fast">
+            
+			<p:calendar value="#{wbs.actualStart}" id="popupCal3"/>    
+			
+      </p:inplace>
+            
+        </p:column>  
+      
+      <p:column style="width:30px">  
+                
+            <f:facet name="header">  
+                actualEnd  
+            </f:facet>  
+        <p:inplace emptyLabel="Select" effectSpeed="fast" editor="true">
+             
+			<p:calendar value="#{wbs.actualEnd}" id="popupCal4" />    
+      </p:inplace>
+            
+        </p:column>  
+        
+        <f:facet name="footer">  
+        
+			<h:commandButton id="refresh" value="refreshWbs" icon="ui-icon-search"  
+                    update=":form:wbsPanel" >
+                    <f:ajax render="@form" execute="@form"></f:ajax>
+            </h:commandButton>          
+        </f:facet>  
+        	
+            <f:facet name="footer">  
+        	 <h:commandButton type="removeSelectedNode" value="removeSelectedNode"
+                action="#{WbsTreeWebBean.removeChild(WbsTreeWebBean.selectedNode)}">
+              	<f:ajax render="@form" execute="@form"></f:ajax>
+          	  </h:commandButton>
+		
+            </f:facet>  
+        
+            <f:facet name="footer">  
+        	 <h:commandButton type="addChildToSelectedRow" value="addChildToSelectedRow"
+                action="#{WbsTreeWebBean.addChild(WbsTreeWebBean.selectedNode)}">
+              	<f:ajax render="@form" execute="@form"></f:ajax>
+          	  </h:commandButton>
+		
+            </f:facet>  
+        
+            <f:facet name="footer">  
+        	 <h:commandButton type="addMainParentNode" value="addParentActivity"
+                action="#{WbsTreeWebBean.addParentNode()}">
+                <f:ajax render="@form" execute="@this"></f:ajax>          	                
+          	  </h:commandButton>		
+            </f:facet>  
+        
+        <f:facet name="footer">  
+            <h:commandButton id="addWbsTree" value="ViewSelected" icon="ui-icon-search"  
+                    update=":form:addWbsTreePanel" oncomplete="wbsTreeDialog1.show()">
+                    <f:ajax render="@form" execute="@form"></f:ajax>  
+        </h:commandButton>
+        </f:facet>  
+        	
+        	<f:facet name="footer">  
+        	 <h:commandButton type="createWbs" value="createWbs"
+                action="#{WbsTreeWebBean.createWbsTasks()}">
+                <f:ajax render="@form" execute="@this"></f:ajax>          	                
+          	  </h:commandButton>		
+            </f:facet>  
+        		                                
+    </p:treeTable>
+    </p:outputPanel>  
+    
+    <p:dialog id="wbsTreeDlg" header="Wbs Task Detail" showEffect="fade" widgetVar="wbsTreeDialog1" modal="true">  
+        <p:outputPanel id="addWbsTreePanel">  
+            <h:panelGrid  columns="2" cellpadding="5" rendered="#{not empty WbsTreeWebBean.selectedNode}">  
+                
+                <h:outputLabel for="name" value="ProjectId:"/>  
+                <h:outputText id="projectId" value="#{WbsTreeWebBean.selectedNode.data.project_id}" style="font-weight:bold" />
+                 
+                <h:outputLabel for="task" value="Task " />  
+                <h:outputText id="task" value="#{WbsTreeWebBean.selectedNode.data.task_name}" style="font-weight:bold" />
+                
+                <h:outputLabel for="name" value="user: " /> 
+                <h:outputText id="assignedTo" value="#{WbsTreeWebBean.selectedNode.data.user_name}" style="font-weight:bold" />
+                
+                <h:outputLabel for="name" value="plannedStart: " />  
+                <h:outputText id="startEstimate" value="#{WbsTreeWebBean.selectedNode.data.startEstimate.toLocaleString()}" style="font-weight:bold" />
+                
+                <h:outputLabel for="name" value="plannedEnd: " />  
+                <h:outputText id="endEstimate" value="#{WbsTreeWebBean.selectedNode.data.endEstimate.toLocaleString()}" style="font-weight:bold" />
+                
+                <h:outputLabel for="name" value="actualStart: " />  
+                <h:outputText id="startActual" value="#{WbsTreeWebBean.selectedNode.data.actualStart.toLocaleString()}" style="font-weight:bold" />
+                
+                <h:outputLabel for="name" value="actualEnd: " />  
+                <h:outputText id="endActual" value="#{WbsTreeWebBean.selectedNode.data.actualEnd.toLocaleString()}" style="font-weight:bold" />
+                
+                <h:outputLabel for="name" value="sffortsPerDay: " />  
+                <h:outputText id="hrsEffortsPerDay" value="#{WbsTreeWebBean.selectedNode.data.effortsPerDay}" style="font-weight:bold" />
+                                  
+                
+                <h:outputLabel for="name" value="effortsEstimated: " />  
+                <h:outputText id="effortsEstimated" value="#{WbsTreeWebBean.selectedNode.data.calculateHoursEstimated()}" style="font-weight:bold" />
+                                  
+                                  
+            </h:panelGrid>  
+        </p:outputPanel>  
+    
+    </p:dialog>  
+    
+        </h:form>
+		</ui:define>
+		
+	<ui:define name="footer"/>
+</ui:composition>
+</html>

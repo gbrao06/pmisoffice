@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/template/template.xhtml">
+	<ui:define name="header"/>
+	
+	<ui:define name="content">
+	
+	 <h:form>
+	    
+	  <h:dataTable id="dt1" value="#{ProjectWebBean.projectList}"
+	  var="item" bgcolor="#F1F1F1" boarder="20" cellspacing="2"
+	  width="100%" rules="all">
+	  
+		  <f:facet name="header" >
+		  <h:outputText value="Project List Data Table"/> 
+		  </f:facet>
+		  
+		  <h:column>
+		  <f:facet name="header">
+		  <h:outputText value="ProjectID"/>
+		  </f:facet>
+		  <h:outputText value="#{item.projectId}"></h:outputText>
+		  </h:column>
+		  
+		  <h:column>
+		  <f:facet name="header">
+		  <h:outputText value="ProjectName"/>
+		  </f:facet>
+		  <h:outputText value="#{item.projectName}"></h:outputText>
+		  </h:column>
+		  
+		  <h:column>
+		  <f:facet name="header">
+		  <h:outputText value="Project Description"/>
+		  </f:facet>
+		  <h:outputText value="#{item.projectDescription}"></h:outputText>
+		  </h:column>
+		  
+		  
+		  <h:column>
+		  <f:facet name="header">
+		  <h:outputText value="Time Stamp"/>
+		  </f:facet>
+		  <h:outputText value="#{item.lastUpdated}"></h:outputText>
+		  </h:column>
+	        
+       </h:dataTable>   
+        
+    		  <f:facet name="header">
+	 
+	 
+	</f:facet>
+	    	  
+	  </h:form>
+	</ui:define>
+	<ui:define name="footer"/>
+</ui:composition>
+</html>

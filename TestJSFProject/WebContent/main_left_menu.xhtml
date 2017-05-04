@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"> 
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="./WEB-INF/template/main.css" rel="stylesheet" type="text/css" />
+</h:head>
+ 
+<ui:composition template="./WEB-INF/template/template.xhtml">
+
+	
+	<ui:define name="header"/>
+	<ui:define name="content">
+	<h:form>
+		<div class="navigation">
+		
+		<p:growl id="messages" autoUpdate="true"/>  
+      
+    <p:tieredMenu  style="width:100px">  
+        <p:submenu label="Home" url="project_main_tab.jsf" target="right_fr" icon="ui-icon-home" >    
+             
+        </p:submenu>  
+        <p:submenu label="admin" >
+          <p:menuitem value="Tab View"  url="project_main_tab.jsf" target="right_fr"  ajax="false" icon="ui-icon-document"/>
+          <p:menuitem value="create teams" outcome="/wbs/index" url="add_teams.jsf"  target="right_fr" icon="ui-icon-newwin"/> 
+          <p:menuitem value="resource usage" outcome="/wbs/index" url="resource_usage.jsf"  target="right_fr" icon="ui-icon-newwin"/>                      
+        </p:submenu>  
+        
+        <p:submenu label="Project Status">
+            <p:menuitem value="all projects"  url="all_projects.jsf" target="right_fr"  ajax="false" icon="ui-icon-disk"/>
+            <p:menuitem value="selected project"  url="project_status.jsf" target="right_fr"  ajax="false" icon="ui-icon-document"/>	            
+        </p:submenu>          
+        <p:separator />
+        
+        <p:submenu label="TimeSheet" >
+          <p:menuitem value="add time" outcome="/wbs/index" url="add_timesheet.jsf"  target="right_fr" icon="ui-icon-clock"/>
+          <p:menuitem value="unlock time sheet" outcome="/wbs/index" url="update_timesheet.jsf"  target="right_fr" icon="ui-icon-clock"/>                      
+        </p:submenu>  
+         
+        
+        <p:submenu label="User">  
+        	<p:menuitem value="Tab View"  url="my_main_tab.jsf" target="right_fr"  ajax="false" icon="ui-icon-document"/>
+        	<p:menuitem value="Time Management"  url="add_my_wbs.jsf" target="right_fr"  ajax="false" icon="ui-icon-document-b"/>            
+        </p:submenu>  
+            
+        <p:submenu label="Easy Task" >               
+            <p:menuitem value="Tab View"  url="simple_main_tab.jsf" target="right_fr"  ajax="false" icon="ui-icon-document"/>  
+        </p:submenu>
+        
+    </p:tieredMenu>
+    	  
+    </div>  
+    </h:form>
+	</ui:define>
+	<ui:define name="footer"/>
+
+</ui:composition>
+</html>

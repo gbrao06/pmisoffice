@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/template/template.xhtml">
+	
+	<ui:define name="content">
+
+
+	   <div id="menu" style="width:100%; height:40px; margin:0px; border:0px; padding:0px;">
+	   
+	   <div class="Project" style="background-color: #2F4F4F;width: 20%; height: 40px;align:left;float:left;">
+	   <a href="project.jsf" target="main_fr" style="font-size:34px;color:white;a:hover { text-decoration:none }">Projects</a>
+	   </div>
+	   
+	   <div class="Project" style="background-color: #2F4F4F;width: 20%; height: 40px;align:left;float:left">
+	   <a href="project.jsf" target="main_fr" style="font-size:30px;color:white;">Task</a>
+	   </div>
+	   
+	   <div class="Task" style="background-color: #2F4F4F;width: 20%; height: 40px;align:left;float:left">
+	   <a href="task.jsf" target="main_fr" style="font-size:30px;color:white;">User</a>
+	   </div>
+	   
+	   <div class="User" style="background-color: #2F4F4F;width: 20%; height: 40px;align:left;float:left">
+	   <a href="project.jsf" target="main_fr" style="font-size:30px;color:white;">Documents</a>
+	   </div>
+	   
+	   <div class="Risk" style="background-color: #2F4F4F;width: 20%; height: 40px;align:left;float:left">
+	   <a href="project.jsf" target="main_fr" style="font-size:30px;color:white;">Statistics</a>
+	   </div>
+	   
+	   </div>
+	   
+	   <div style="width:99%;">
+	   <div class="leftd">
+	   <iframe src="http://www.google.com" style="background-color: white;overflow:hidden;width: 100%; height: 1000px;align:left;float:left;scrolling:no; marginwidth:0px; marginheight:0px; frameborder:0px; vspace:0px; hspace:0px;" name="main_fr"/>
+	   </div>
+	   </div>
+	   	
+	   
+	</ui:define>
+
+	<ui:define name="footer">
+	    Add your footer here or delete to use the default
+	</ui:define>
+
+</ui:composition>
+</html>

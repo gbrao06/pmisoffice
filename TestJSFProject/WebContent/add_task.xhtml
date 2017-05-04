@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"> 
+
+<ui:composition template="/WEB-INF/template/template.xhtml">
+	<ui:define name="header">
+	   
+	</ui:define>
+	
+	<ui:define name="content">
+	    
+	    <h:form>
+	    
+	    <p:panelGrid columns="1">
+           <h:outputText value="Select Project And Add New Task" style="background-color:#2F4F4F;color:white"></h:outputText>   
+        </p:panelGrid>
+            
+	   <p:panelGrid columns="4">
+            
+            <h:outputText value="Select ProjectID :"></h:outputText>
+	            
+	            <p:selectOneMenu value="#{TaskWebBean.project_id}">
+			    	<f:selectItems value="#{ProjectWebBean.getProjectListBigInts()}"  />	    			    	
+				</p:selectOneMenu>
+				
+			<h:commandButton type="submit" value="Refresh Parent Tasks Selection" style="color:#2F4F4F;"
+                action="#{WbsWebBean.updateTasks()}">
+          	  <f:ajax render="@form" execute="@form"></f:ajax>
+          	  </h:commandButton>
+			
+			<h:outputText value="#{TaskWebBean.project_id}" style="background-color:#2F4F4F;color:white;"></h:outputText>
+	        	
+		</p:panelGrid>
+		
+		<p:panelGrid columns="2">	        
+            
+            <h:outputText value="Group Type :"></h:outputText>
+	            
+	            <p:selectOneMenu id="combo_task_group" value="#{TaskWebBean.group_type}">  
+				<f:selectItem id="dev" itemLabel="Development" itemValue="Development" />  
+				<f:selectItem id="qa" itemLabel="Quality Assurance" itemValue="Quality Assurance" />
+				<f:ajax render="@form" execute="@form"></f:ajax>  
+				</p:selectOneMenu>  
+         			
+			<h:outputText value="Select Parent Task:" style="color:navy"></h:outputText>
+            
+            <p:selectOneMenu  value="#{TaskWebBean.parent_task_name}">
+		    	<f:selectItems id="parentTaskCombo" value="#{TaskWebBean.getTaskNamesByProjectId(TaskWebBean.project_id)}" />
+		    	<f:ajax render="@form" execute="@form"></f:ajax>		    	 
+			</p:selectOneMenu>
+            
+            <h:outputText value="Task Name :"></h:outputText>
+            <p:inputText id="task_name" value="#{TaskWebBean.task_name}"></p:inputText>
+
+            		
+		    <p:commandButton type="submit" process="@this" value="Add Task" style="color:#2F4F4F;"
+                action="#{TaskWebBean.addTask(TaskWebBean.task_name)}">
+                
+                </p:commandButton>
+            	
+        </p:panelGrid>
+         
+	    </h:form>
+	
+	</ui:define>
+	<ui:define name="footer">
+	   
+	</ui:define>
+</ui:composition>
+</html>

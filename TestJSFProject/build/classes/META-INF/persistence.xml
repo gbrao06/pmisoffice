@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="TestPU" transaction-type="JTA">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<jta-data-source>jdbc/pmisdbdsn</jta-data-source>
+		<class>openpro.datamodel.entities.Docmanagertbl</class>
+		<class>openpro.datamodel.entities.Issuetbl</class>
+		<class>openpro.datamodel.entities.IssuetblPK</class>
+		<class>openpro.datamodel.entities.Projecttbl</class>
+		<class>openpro.datamodel.entities.Tasktbl</class>
+		<class>openpro.datamodel.entities.Timesheettbl</class>
+		<class>openpro.datamodel.entities.Usertbl</class>
+		<class>openpro.datamodel.entities.Wbstbl</class>
+		<class>openpro.datamodel.entities.Resourcecosttbl</class>
+		<class>openpro.datamodel.entities.Usertimeentrytbl</class>
+		
+	</persistence-unit>
+</persistence>

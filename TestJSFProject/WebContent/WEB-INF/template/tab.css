@@ -1,0 +1,41 @@
+/* Body tag */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: small; 
+  background-color: #FFFFFF;
+  margin: 50px  }
+ 
+ul#tabnav {
+font: bold 11px verdana, arial, sans-serif;
+list-style-type: none;
+padding-bottom: 24px;
+border-bottom: 1px solid #6c6;
+margin: 0;
+}
+ul#tabnav li {
+float: left;
+height: 21px;
+background-color: #cfc;
+margin: 2px 2px 0 2px;
+border: 1px solid #6c6;
+}
+body#tab1 li.tab1, body#tab2 li.tab2, body#tab3 li.tab3, body#tab4 li.tab4 {
+border-bottom: 1px solid #fff;
+background-color: #fff;
+}
+ 
+body#tab1 li.tab1 a, body#tab2 li.tab2 a, body#tab3 li.tab3 a, body#tab4 li.tab4 a {
+color: #000;
+}
+ 
+#tabnav a {
+float: left;
+display: block;
+color: #666;
+text-decoration: none;
+padding: 4px;
+}
+ 
+#tabnav a:hover {
+background: #fff;
+}

@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"> 
+
+<ui:composition template="/WEB-INF/template/template.xhtml">
+	<ui:define name="header">
+	   
+	</ui:define>
+	
+	<ui:define name="content">
+	    
+			<h:form id="form">  
+ 
+		  <p:panelGrid columns="4" style="margin-bottom:0px">  
+            	<h:outputText for="week" value="Week1stDay:" />    
+        		
+        		<h:outputText value="#{TimeSheetWebBean.getThisWeek().toLocaleString()}" id="cal" showButtonPanel="false"/>
+        		  
+        		<h:outputText for="FilteredBy" value="User:" />
+				<h:outputText  value="#{TimeSheetWebBean.user_name}" />    
+        		
+				<h:outputText for="Timesheet:" value="#{TimeSheetWebBean.getTimeSheetTag()}" />
+				        		
+        	</p:panelGrid>  
+        	<p:panelGrid columns="2" style="margin-bottom:0px">
+        	<h:outputText value="weekEffort:"/>
+        	<h:outputText id="weekEffort"  value="#{TimeSheetWebBean.totalWeekEffort}"/>
+          </p:panelGrid>
+  		<p:outputPanel id="timeSheetPanel">
+		 <p:dataTable id="dt1" value="#{TimeSheetWebBean.get_user_timesheet_wbs_list()}"
+			  var="item" rowKey="#{item.wbsTable.id}"  selection="#{TimeSheetWebBean.selectedWbsWrapper}" selectionMode="single" bgcolor="#F1F1F1" boarder="0" cellspacing="0"
+			  width="80%" rules="all">
+   			
+   			<p:column style="width:20px;">
+		  <f:facet name="header">
+		    
+		  <h:outputText value="WbsID"/>
+		  
+		  </f:facet>
+		  <h:outputText value="#{item.wbsTable.wbsId}"></h:outputText>
+		  </p:column>
+		 
+		  <p:column style="width:10px;">
+		  <f:facet name="header" >
+		  <h:outputText value="ProjectId" />
+		  </f:facet>
+		  <h:outputText value="#{item.wbsTable.projecttbl.projectId}">  </h:outputText>
+      	  
+      	  </p:column>
+		  
+		 
+		  <p:column style="width:20px;">
+		  <f:facet name="header">
+		    
+		  <h:outputText value="TaskName"/>
+		  
+		  </f:facet>
+		  <h:outputText value="#{item.wbsTable.tasktbl.taskName}"></h:outputText>
+		  </p:column>
+		 
+		 <p:column style="width:8px;">
+		  <f:facet name="header">
+		    
+		  <h:outputText value="#{TimeSheetWebBean.getSunday()}"/>
+		  
+		  </f:facet>
+		  <p:inputText value="#{item.sundayTime}" style="width:40px;">
+		  <f:ajax  update="idTotal" render="@form" execute="@this" listener="#{item.calculateTotalWeekTime()}"></f:ajax>
+		  </p:inputText>
+		  </p:column>
+		  
+          <p:column style="width:8px;">
+		  <f:facet name="header">
+		    
+		  <h:outputText value="#{TimeSheetWebBean.getMonday()}"/>
+		  
+		  </f:facet>
+		  
+		  <h:inputText value="#{item.mondayTime}" style="width:40px;">
+		 <f:ajax  update="idTotal" render="@form" execute="@this" listener="#{item.calculateTotalWeekTime()}"></f:ajax>
+		  </h:inputText>
+		  
+		  </p:column>
+		  
+		  <p:column style="width:8px;">
+		  <f:facet name="header">
+		    
+		  <h:outputText value="#{TimeSheetWebBean.getTuesday()}"/>
+		  
+		  </f:facet>
+		  <p:inputText value="#{item.tuesdayTime}" style="width:40px;">
+		  <f:ajax  update="idTotal" render="@form" execute="@this" listener="#{item.calculateTotalWeekTime()}"></f:ajax>
+		  </p:inputText>
+		  </p:column>
+		  
+
+		  <p:column style="width:8px;">
+		  <f:facet name="header">
+		    
+		  <h:outputText value="#{TimeSheetWebBean.getWednsday()}"/>
+		  
+		  </f:facet>
+		  <p:inputText value="#{item.wednsdayTime}"  style="width:40px;">
+		  <f:ajax  update="idTotal" render="@form" execute="@this" listener="#{item.calculateTotalWeekTime()}"></f:ajax>
+		  </p:inputText>
+		  </p:column>
+		    
+		  <p:column style="width:8px;">
+		  <f:facet name="header">
+		  <h:outputText value="#{TimeSheetWebBean.getThursday()}"/>
+		  </f:facet>
+		  <p:inputText value="#{item.thursdayTime}" style="width:40px;">
+		  <f:ajax  update="idTotal" render="@form" execute="@this" listener="#{item.calculateTotalWeekTime()}"></f:ajax>
+		  </p:inputText>
+		  </p:column>
+		  
+		  
+		  <p:column style="width:8px;">
+		  <f:facet name="header">
+		    
+		  <h:outputText value="#{TimeSheetWebBean.getFriday()}"/>
+		  
+		  </f:facet>
+		  <p:inputText value="#{item.fridayTime}"  size="1">
+		  <f:ajax  update="idTotal" render="@form" execute="@this" listener="#{item.calculateTotalWeekTime()}"></f:ajax>
+		  </p:inputText>
+		  </p:column>
+		  
+		  
+		  <p:column style="width:8px;">
+                <f:facet name="header">
+                    <h:outputText value="#{TimeSheetWebBean.getSaturday()}" />
+                </f:facet>
+          		  
+           <p:inputText value="#{item.saturdayTime}" size="1" >
+           <f:ajax  update="idTotal" render="@form" execute="@this" listener="#{item.calculateTotalWeekTime()}"></f:ajax>
+      		</p:inputText>
+        </p:column>
+        
+		 <p:column style="width:8px;">
+		  <f:facet name="header">		    
+		  <h:outputText value="Total"/>
+		  
+		  </f:facet>
+		  <h:outputText id ="idTotal" value="#{item.totalTime}" style="width:40px;">       		
+		  </h:outputText>
+		  </p:column>		 
+		  		  
+        <f:facet name="footer">  
+            <p:commandButton id="refreshBtn" value="refresh" icon="ui-icon-search">
+            <p:ajax render="@form" execute="@this"></p:ajax>          
+        </p:commandButton>
+        </f:facet>  
+          
+        <f:facet name="footer">  
+            <p:commandButton id="viewTimeSheetBtn" value="ViewTimeSheet" icon="ui-icon-search"  
+                    update=":form:timeSheetViewPanel" oncomplete="documentDialog.show()">
+                      
+        </p:commandButton>
+        </f:facet>  
+            
+        <f:facet name="footer">
+        <p:commandButton type="submit" value="submit time sheet"
+                action="#{TimeSheetWebBean.addTimeSheet}">
+                </p:commandButton>                  
+        </f:facet>
+         </p:dataTable>
+		  </p:outputPanel>
+		
+       <p:dialog id="dialog" header="Wbs Task Detail" showEffect="fade" widgetVar="documentDialog" modal="true">  
+        
+        <p:outputPanel id="timeSheetViewPanel">  
+            <h:panelGrid  columns="2" cellpadding="5" rendered="#{not empty TimeSheetWebBean.selectedWbsWrapper}">  
+                
+                <h:outputLabel for="name" value="ProjectId:"/>  
+                <h:outputText id="projectId" value="#{TimeSheetWebBean.selectedWbsWrapper.wbsTable.projecttbl.projectId}" style="font-weight:bold" />
+                 
+                <h:outputLabel for="task" value="Task " />  
+                <h:outputText id="task" value="#{TimeSheetWebBean.selectedWbsWrapper.wbsTable.tasktbl.taskName}" style="font-weight:bold" />
+                
+                <h:outputLabel for="name" value="user: " /> 
+                <h:outputText id="user" value="#{TimeSheetWebBean.selectedWbsWrapper.wbsTable.userId}" style="font-weight:bold" />
+                
+                <h:outputLabel for="name" value="wbsId: " />  
+                <h:outputText id="wbsid" value="#{TimeSheetWebBean.selectedWbsWrapper.wbsTable.wbsId}" style="font-weight:bold" />
+                
+                <h:outputLabel for="name" value="mon " />  
+                <h:outputText id="mon" value="#{TimeSheetWebBean.selectedWbsWrapper.mondayTime}" style="font-weight:bold" />
+                                  
+                <h:outputLabel for="name" value="tue " />  
+                <h:outputText id="tue" value="#{TimeSheetWebBean.selectedWbsWrapper.tuesdayTime}" style="font-weight:bold" />
+                
+               
+                <h:outputLabel for="name" value="wed" />  
+                <h:outputText id="wed" value="#{TimeSheetWebBean.selectedWbsWrapper.wednsdayTime}" style="font-weight:bold" />
+                
+                <h:outputLabel for="name" value="thu" />  
+                <h:outputText id="thu" value="#{TimeSheetWebBean.selectedWbsWrapper.thursdayTime}" style="font-weight:bold" />
+                                   
+                <h:outputLabel for="name" value="fri" />  
+                <h:outputText id="fri" value="#{TimeSheetWebBean.selectedWbsWrapper.fridayTime}" style="font-weight:bold" />
+                
+                <h:outputLabel for="name" value="sat" />  
+                <h:outputText id="sat" value="#{TimeSheetWebBean.selectedWbsWrapper.saturdayTime}" style="font-weight:bold" />
+                
+            </h:panelGrid>  
+    	</p:outputPanel>
+    	</p:dialog>
+    	
+    </h:form>  
+
+	</ui:define>
+	<ui:define name="footer">
+	   
+	</ui:define>
+</ui:composition>
+</html>

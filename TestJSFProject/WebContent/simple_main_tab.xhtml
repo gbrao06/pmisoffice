@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"> 
+
+<h:body>
+<ui:composition template="/WEB-INF/template/template.xhtml">
+	
+	<ui:define name="header"/>
+	    
+	<ui:define name="content">
+	<h:form>
+		<p:tabView id="simpleMainTab" dynamic="true" cache="true">  
+  
+        <p:tab id="tab12" title="create New Task">  
+        <h:panelGrid columns="1" cellpadding="0">
+              <ui:include src="add_task.xhtml"/>
+              </h:panelGrid>
+        </p:tab>  
+  
+        <p:tab id="tab17" title="Add To Wbs">  
+        <h:panelGrid columns="1" cellpadding="0">
+              <ui:include src="add_wbs.xhtml"/>
+              </h:panelGrid>
+        </p:tab>  
+        
+         <p:tab id="tab13" title="Update My Wbs">  
+            <h:panelGrid columns="1" cellpadding="0">    
+            <ui:include src="update_wbs.xhtml"/>
+            </h:panelGrid>              
+        </p:tab>  
+        
+  		   <p:tab id="tab15" title="Bulk Wbs">  
+            <h:panelGrid columns="1" cellpadding="0">    
+            <ui:include src="add_wbs_tree.xhtml"/>
+            </h:panelGrid>             
+        </p:tab>  
+              
+    </p:tabView>  
+    </h:form>	
+	</ui:define>
+	<ui:define name="footer"/>
+	</ui:composition>
+	</h:body>
+</html>

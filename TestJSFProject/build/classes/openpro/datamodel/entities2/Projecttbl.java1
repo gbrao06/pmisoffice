@@ -1,0 +1,102 @@
+package openpro.datamodel.entities;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigInteger;
+import java.sql.Timestamp;
+import java.util.List;
+
+
+/**
+ * The persistent class for the projecttbl database table.
+ * 
+ */
+@Entity
+@Table(name="projecttbl")
+public class Projecttbl implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false)
+	private String id;
+
+	@Column(name="created_by", nullable=false, length=45)
+	private String createdBy;
+
+	@Column(name="last_updated", nullable=false)
+	private Timestamp lastUpdated;
+
+	@Column(name="project_description", nullable=false, length=500)
+	private String projectDescription;
+
+	@Column(name="project_id", nullable=false)
+	private BigInteger projectId;
+
+	@Column(name="project_name", nullable=false, length=60)
+	private String projectName;
+
+	//bi-directional many-to-one association to Wbstbl
+	@OneToMany(mappedBy="projecttbl")
+	private List<Wbstbl> wbstbls;
+
+	public Projecttbl() {
+	}
+
+	public String getId() {
+		return this.id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getCreatedBy() {
+		return this.createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Timestamp getLastUpdated() {
+		return this.lastUpdated;
+	}
+
+	public void setLastUpdated(Timestamp lastUpdated) {
+		this.lastUpdated = lastUpdated;
+	}
+
+	public String getProjectDescription() {
+		return this.projectDescription;
+	}
+
+	public void setProjectDescription(String projectDescription) {
+		this.projectDescription = projectDescription;
+	}
+
+	public BigInteger getProjectId() {
+		return this.projectId;
+	}
+
+	public void setProjectId(BigInteger projectId) {
+		this.projectId = projectId;
+	}
+
+	public String getProjectName() {
+		return this.projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public List<Wbstbl> getWbstbls() {
+		return this.wbstbls;
+	}
+
+	public void setWbstbls(List<Wbstbl> wbstbls) {
+		this.wbstbls = wbstbls;
+	}
+
+}

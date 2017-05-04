@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"> 
+
+<ui:composition template="/WEB-INF/template/template.xhtml">
+	<ui:define name="header"/>
+	
+	<ui:define name="content">
+	
+	 <h:form>
+	     
+	  <p:dataTable id="dt1" value="#{ProjectStatusWebBean.getProjectListWrappers()}"
+	  var="item" rowKey="#{item.projectTbl.projectId}"  selection="#{ProjectStatusWebBean.selectedProjectWrapper}" selectionMode="single" bgcolor="#F1F1F1" boarder="10" cellspacing="2"
+	  width="100%" rules="all" >
+	  
+		  <f:facet name="header" >
+		  <h:outputText value="My Assigned Projects"/> 
+		  </f:facet>
+		
+		  <p:column>
+		  <f:facet name="header" >
+		  <h:outputText value="ProjectID" />
+		  </f:facet>
+		    
+          
+          <h:outputText value="#{item.projectTbl.projectId}">  </h:outputText>
+      	  
+        </p:column>
+		  
+		  <p:column>
+		  <f:facet name="header">
+		    
+		  <h:outputText value="ProjectName"/>
+		  
+		  </f:facet>
+		  
+		  <h:outputText value="#{item.projectTbl.projectName}"></h:outputText>
+		  </p:column>
+		  
+		  <p:column>
+		  <f:facet name="header">
+		  <h:outputText value="createdBy"/>
+		  </f:facet>
+		  <h:outputText value="#{item.projectTbl.createdBy}"></h:outputText>
+		  </p:column>
+		 
+		  <p:column>
+		  <f:facet name="header">
+		  <h:outputText value="EStart"/>
+		  </f:facet>
+		  <h:outputText value="#{item.projectStartDate}"></h:outputText>
+		  </p:column>
+		 
+		  <p:column>
+		  <f:facet name="header">
+		  <h:outputText value="EFinish"/>
+		  </f:facet>
+		  <h:outputText value="#{item.projectEndDate}"></h:outputText>
+		  </p:column>
+		     
+		  <p:column>
+		  <f:facet name="header">
+		  <h:outputText value="%complete"/>
+		  </f:facet>
+		  
+		  <h:outputText value="#{item.percentageComplete}"></h:outputText>
+		  </p:column>
+		 
+		 
+		  <p:column>
+		  <f:facet name="header">
+		  <h:outputText value="plannedWorkHours"/>
+		  </f:facet>
+		  <h:outputText value="#{item.totalEstimatedWorkHours}"></h:outputText>
+		  </p:column>
+		 
+		  <p:column>
+		  <f:facet name="header">
+		  <h:outputText value="actualWorkHours"/>
+		  </f:facet>
+		  <h:outputText value="#{item.totalActualWorkHoursSpent}"></h:outputText>
+		  </p:column>
+		 
+		  <p:column>
+		  <f:facet name="header">
+		  <h:outputText value="%workcomplete"/>
+		  </f:facet>
+		  <h:outputText value="#{item.percentageWorkComplete}"></h:outputText>
+		  </p:column>
+		 
+		  <p:column>
+		  <f:facet name="header">
+		  <h:outputText value="status"/>
+		  </f:facet>
+		  <h:outputText value="#{item.projectStatus}"></h:outputText>
+		  </p:column>
+		 
+		<f:facet name="footer">
+        <p:commandButton type="submit" value="Show Details"
+                action="my_project_status.jsf">
+                </p:commandButton>                 
+        </f:facet>        	              
+        
+       </p:dataTable>   
+    	
+    	 <f:facet name="header">
+		 </f:facet>
+	        
+                
+        
+	  </h:form>
+	</ui:define>
+	<ui:define name="footer"/>
+</ui:composition>
+</html>

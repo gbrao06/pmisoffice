@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">  
+  
+
+<ui:composition template="/WEB-INF/template/template.xhtml">
+	<ui:define name="header"/>
+	
+	<ui:define name="content">
+	
+	 <h:form>
+	     
+	  <p:dataTable id="dt1" value="#{ResourceCostWebBean.getProjectResourceCostStatus()}"
+	  paginator="true" var="item" bgcolor="#F1F1F1" boarder="0" cellspacing="2"
+	  width="80%" rules="all" editable="true" rowKey="#{item.resourceCostTbl}" selectionMode="single">
+	  
+	 
+		  <f:facet name="header" >
+		  <h:outputText value="Project Resource Cost Details"/>
+
+		  </f:facet>
+		
+		  <p:column style="width:60px;">
+		  <f:facet name="header" >
+		  <h:outputText value="ProjectID" />
+		  </f:facet>
+		  <h:outputText value="#{item.resourceCostTbl.projecttbl.projectId}">  </h:outputText>
+      	  </p:column>
+		  
+		  <p:column style="width:20px;">
+		  <f:facet name="header">
+		    
+		  <h:outputText value="ResourceId"/>
+		  
+		  </f:facet>
+		  <h:outputText value="#{item.resourceCostTbl.usertbl.userId}" style="width:20px;"></h:outputText>
+		  </p:column>
+		  
+		  <p:column style="width:20px;">
+		  <f:facet name="header">
+		    
+		  <h:outputText value="estimated Work Hours"/>
+		  
+		  </f:facet>
+		  <h:outputText value="#{item.estimatedWorkHours}" style="width:20px;"></h:outputText>
+		  </p:column>
+		  
+		 <p:column style="width:8px;">
+		  <f:facet name="header">
+		  <h:outputText value="actualHoursWorked" style="width:40px;"/>
+		  </f:facet>
+		  <h:outputText value="#{item.actualHoursWorked}">
+		  </h:outputText>
+		  </p:column>
+		  
+		  <p:column style="width:8px;">
+		  <f:facet name="header">
+		  <h:outputText value="estimatedCost" style="width:40px;"/>
+		  </f:facet>
+		  <h:outputText value="#{item.estimatedCost}">
+		  </h:outputText>
+		  </p:column>
+		        
+		  <p:column style="width:8px;">
+		  <f:facet name="header">
+		  <h:outputText value="actualCost" style="width:40px;"/>
+		  </f:facet>
+		  <h:outputText value="#{item.actualCost}"></h:outputText>
+		  </p:column>
+		        	
+       </p:dataTable>   
+    	
+        <f:facet name="footer">
+            <h:outputText value="Footer" />
+        </f:facet>        	              
+	  </h:form>
+	</ui:define>
+	<ui:define name="footer"/>
+</ui:composition>
+</html>

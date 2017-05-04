@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"> 
+
+<ui:composition template="/WEB-INF/template/template.xhtml">
+	
+	<ui:define name="header"/>
+	
+	<ui:define name="content">
+	<h:form>
+
+
+		
+	    
+		    
+	    <p:panelGrid columns="1">
+            
+             	  <h:outputText value="ADD A NEW USER TO SYSTEM" style="background-color:#2F4F4F;color:white"></h:outputText>  
+		</p:panelGrid>
+ 	    <p:panelGrid columns="2">
+                
+ 	         <h:outputText  name="email_id" value="email :" style="background-color:#F5F5DC;color:navy"> </h:outputText>
+				
+ 	          <h:inputTextarea id="email" value="#{UserWebBean.email}" > 
+ 	    		</h:inputTextarea>
+ 	       
+ 	       
+            <h:outputText value="pass word :" style="background-color:#F5F5DC;color:navy;"></h:outputText>
+            
+            <h:inputText id="pass_wd" value="#{UserWebBean.pass_wd}"
+                required="true" requiredMessage="Please Enter Pass word"></h:inputText>
+ 	             
+ 	         <h:outputText  name="first_name" value="first_name :" style="background-color:#F5F5DC;color:navy"> </h:outputText>
+				
+ 	          <h:inputText id="first_name" value="#{UserWebBean.first_name}"  > 
+ 	    		</h:inputText>
+ 	            
+ 	            
+ 	         <h:outputText  name="last_name_id" value="last_name :" style="background-color:#F5F5DC;color:navy"> </h:outputText>
+				
+ 	          <h:inputText id="last_name" value="#{UserWebBean.last_name}"  > 
+ 	    		</h:inputText>
+ 	            
+               <h:outputText value="Role Group :" style="background-color:#F5F5DC;color:navy;"></h:outputText>
+	            
+	            <h:selectOneMenu id="combo_task_group" value="#{UserWebBean.role}">  
+				<f:selectItem id="dev" itemLabel="Developer" itemValue="Developer" />  
+				<f:selectItem id="qa" itemLabel="Manager" itemValue="Manager" />  
+				</h:selectOneMenu>  
+		        
+            <h:commandButton type="submit" value="Add User" style="background-color:#F5F5DC;color:navy"
+                action="#{UserWebBean.addUser}">
+                <f:ajax render="@form" execute="@form"></f:ajax>
+                </h:commandButton>
+            	
+        </p:panelGrid>
+	    </h:form>
+		</ui:define>
+	<ui:define name="footer"/>
+</ui:composition>
+</html>

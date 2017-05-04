@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"> 
+<ui:composition template="/WEB-INF/template/template.xhtml">
+	
+	<ui:define name="header"/>
+	
+	<ui:define name="content">
+
+	 <p:panelGrid columns="2">   
+	    <h:outputText value="ADD A NEW PROJECT" style="background-color:#2F4F4F;color:white"></h:outputText>  
+    </p:panelGrid> 
+    
+	<h:form>
+		    
+	    <p:panelGrid columns="2">
+            
+            <h:outputText value="Project ID :" style="background-color:#F5F5DC;color:navy"></h:outputText>
+            <p:inputText id="projectId" value="#{ProjectWebBean.project_id}">
+                </p:inputText>
+ 			
+            <h:outputText value="Project Name :" style="background-color:#F5F5DC;color:navy;"></h:outputText>
+            
+            <p:inputText id="project_name" value="#{ProjectWebBean.project_name}"></p:inputText>
+ 	         
+ 	            
+ 	         <h:outputText  name="id" value="Project Description :" style="background-color:#F5F5DC;color:navy"> </h:outputText>
+				
+ 	          <p:inputTextarea id="project_description" value="#{ProjectWebBean.project_description}" cols="30" rows="10" > 
+ 	    		</p:inputTextarea>
+ 	            
+           
+    	 <f:facet name="header">
+		 </f:facet>
+	        
+            <p:commandButton type="submit" value="Add Project" style="background-color:#F5F5DC;color:navy"
+                action="#{ProjectWebBean.addProject}">
+                <p:ajax render="@form" execute="@form"></p:ajax>
+                </p:commandButton>
+            	
+        </p:panelGrid>
+        
+        </h:form>
+		</ui:define>
+	<ui:define name="footer"/>
+</ui:composition>
+</html>

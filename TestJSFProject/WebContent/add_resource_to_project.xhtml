@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"> 
+	
+<ui:composition template="/WEB-INF/template/template.xhtml">
+	<ui:define name="header">
+	   
+	</ui:define>
+	
+	<ui:define name="content">
+	    <h:form>
+	    <p:panelGrid columns="4">
+        
+	    <div>
+           <h:outputText value="Add: Resource to Project:" style="background-color:#2F4F4F;color:white"></h:outputText>   
+        </div>
+        </p:panelGrid>    
+	    <p:panelGrid columns="4">
+            
+            <h:outputText value="Select ProjectID :" ></h:outputText>
+	            
+	            <h:selectOneMenu value="#{ResourceCostWebBean.addResource.projectId}">
+			    	<f:selectItems value="#{ProjectWebBean.getProjectListBigInts()}"  />
+			    	<f:ajax render="@form" execute="@form"></f:ajax>			    	
+				</h:selectOneMenu>
+			
+			<h:outputText value="#{ResourceCostWebBean.addResource.projectId}" style="background-color:#2F4F4F;color:white"></h:outputText>
+	        	
+		</p:panelGrid>
+		
+		
+		<p:panelGrid id="userlist" columns="3">	            
+	        <h:outputText value="Select User :" ></h:outputText>
+            <p:selectOneMenu value="#{ResourceCostWebBean.addResource.userId}"> 
+            	<f:selectItems value="#{UserWebBean.getUserIDList()}" />
+            	<f:ajax render="@form" execute="@form"></f:ajax>	    	
+			</p:selectOneMenu>
+			
+			<h:outputText value="#{ResourceCostWebBean.addResource.userId}" style="background-color:#2F4F4F;color:white;"></h:outputText>
+			 
+	 	</p:panelGrid>
+	 	
+		<p:panelGrid columns="2">	 
+		      
+			
+			<h:outputText value="costPerHour :"></h:outputText>
+	        <p:inputText value="#{ResourceCostWebBean.addResource.costperhour}" ></p:inputText>
+	        
+	        <h:outputText value="billable" style="color:navy;"></h:outputText>
+        
+            <p:selectOneMenu value="#{ResourceCostWebBean.addResource.billable}">
+		    	<f:selectItems value="0" />
+		    	<f:selectItems value="1" />
+			</p:selectOneMenu>
+			
+		</p:panelGrid>
+		
+		<p:panelGrid columns="2">	 
+			 <p:commandButton type="submit" process="@this" value="Add ResourceToProject"  style="color:#2F4F4F;"
+                action="#{ResourceCostWebBean.addResource.addResourceToProject()}">
+          	
+          	  </p:commandButton>
+			 </p:panelGrid>   
+			  		        
+	    </h:form>
+	
+	</ui:define>
+	<ui:define name="footer">
+	   
+	</ui:define>
+</ui:composition>
+</html>

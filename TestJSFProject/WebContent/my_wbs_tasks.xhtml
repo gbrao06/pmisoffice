@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">  
+
+<ui:composition template="/WEB-INF/template/template.xhtml">
+	<ui:define name="header"/>
+	
+	<ui:define name="content">
+	
+	 <h:form>
+	     
+	         <p:panelGrid columns="4">
+            
+            <h:outputText value="Select ProjectID :" ></h:outputText>
+	            
+	            <h:selectOneMenu value="#{TaskWebBean.project_id}">
+			    	<f:selectItems value="#{ProjectWebBean.getProjectListBigInts()}"  />
+			    	<f:ajax render="@form" execute="@form"></f:ajax>			    	
+				</h:selectOneMenu>
+			<h:commandButton type="submit" value="Refresh Tasks" style="color:#2F4F4F">
+          	  <f:ajax render="@form" execute="@form"></f:ajax>          	  
+          	  </h:commandButton>
+			
+			<h:outputText value="#{TaskWebBean.project_id}" style="background-color:#2F4F4F;color:white"></h:outputText>
+	        	
+		</p:panelGrid>
+		
+	
+	  <p:dataTable id="dt1" value="#{WbsWebBean.get_user_wbs_wrapper_list_by_project(TaskWebBean.project_id)}"
+	  paginator="true" var="item" bgcolor="#F1F1F1" boarder="0" cellspacing="2"
+	  width="80%" rules="all" editable="true" rowKey="#{item.wbsTable}" selectionMode="single">
+	  
+	 
+		  <f:facet name="header" >
+		  <h:outputText value="My Assigned Tasks"/> 
+		  </f:facet>
+		
+		  <p:column style="width:60px;">
+		  <f:facet name="header" >
+		  <h:outputText value="ProjectID" />
+		  </f:facet>
+		  <h:outputText value="#{item.wbsTable.projecttbl.projectId}">  </h:outputText>
+      	  </p:column>
+		  
+		  <p:column style="width:20px;">
+		  <f:facet name="header">
+		    
+		  <h:outputText value="WbsId"/>
+		  
+		  </f:facet>
+		  <h:outputText value="#{item.wbsTable.wbsId}" style="width:20px;"></h:outputText>
+		  </p:column>
+		  
+		  <p:column style="width:20px;">
+		  <f:facet name="header">
+		    
+		  <h:outputText value="TaskName"/>
+		  
+		  </f:facet>
+		  <h:outputText value="#{item.wbsTable.tasktbl.taskName}" style="width:20px;"></h:outputText>
+		  </p:column>
+		  
+		 <p:column style="width:8px;">
+		  <f:facet name="header">
+		  <h:outputText value="plannedStart" style="width:40px;"/>
+		  </f:facet>
+		  <h:outputText value="#{item.wbsTable.startEstimate}">
+		  <f:convertDateTime pattern="dd.MM.yyyy"/>
+		  </h:outputText>
+		  </p:column>
+		  
+		  <p:column style="width:8px;">
+		  <f:facet name="header">
+		  <h:outputText value="plannedFinish" style="width:40px;"/>
+		  </f:facet>
+		  <h:outputText value="#{item.wbsTable.endEstimate}">
+		  <f:convertDateTime pattern="dd.MM.yyyy"/>
+		  </h:outputText>
+		  </p:column>
+		        
+		  <p:column style="width:8px;">
+		  <f:facet name="header">
+		  <h:outputText value="plannedWorkHrs" style="width:40px;"/>
+		  </f:facet>
+		  <h:outputText value="#{item.getPlannedEffort()}"></h:outputText>
+		  </p:column>
+		        
+		  <p:column style="width:10px;"> 
+		  <f:facet name="header">
+		  <h:outputText value="%complete"/>
+		  </f:facet> 
+		  <h:outputText value="#{item.getPercentComplete()}"  style="width:40px;"></h:outputText>
+		  </p:column>
+		  
+		  <p:column style="width:8px;">
+		  <f:facet name="header">
+		  <h:outputText value="actualStart" style="width:40px;"/>
+		  </f:facet>
+		  <h:outputText value="#{item.wbsTable.startActual}">
+		  <f:convertDateTime pattern="dd.MM.yyyy"/>
+		  </h:outputText>
+		  </p:column>
+		  
+		  <p:column style="width:8px;">
+		  <f:facet name="header">
+		  <h:outputText value="actualWorkHrs" style="width:40px;"/>
+		  </f:facet>
+		  <h:outputText value="#{item.getActualEffort()}"></h:outputText>
+		  </p:column>
+		       
+		<p:column style="width:10px;">
+		  <f:facet name="header">
+		    <h:outputText value="%workComplete"></h:outputText>
+		  </f:facet>
+			<h:outputText value="#{item.getPercentWorkComplete()}" style="width:40px;"></h:outputText>  	  	       	         
+		</p:column>
+	
+		  <p:column>
+		  
+			  <f:facet name="header">
+			  <h:outputText value="assignedTo"/>
+			  </f:facet>
+			  <h:outputText value="#{item.wbsTable.getUsertbl().userId}"></h:outputText>
+			
+		  </p:column>
+		 		
+       </p:dataTable>   
+    	
+        <f:facet name="footer">
+            <h:outputText value="Footer" />
+        </f:facet>        	              
+	  </h:form>
+	</ui:define>
+	<ui:define name="footer"/>
+</ui:composition>
+</html>

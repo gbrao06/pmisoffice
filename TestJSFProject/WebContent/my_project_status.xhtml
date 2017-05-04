@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">  
+
+<ui:composition template="/WEB-INF/template/template.xhtml">
+	<ui:define name="header"/>
+	
+	<ui:define name="content">
+	
+	 <h:form>
+	  <p:accordionPanel dynamic="true" cache="true">  
+        <p:tab title="Project Information">  
+        	<p:outputPanel> 
+            <h:panelGrid columns="4" cellpadding="7">  
+    
+               <h:outputText value=" Project Id:" style="background-color:#2F4F4F;color:white" />
+               <h:outputText value="#{ProjectStatusWebBean.selectedProjectWrapper.projectTbl.projectId}" style="background-color:cyan;color:navy;"/>
+               <h:outputText value="Project Status:" style="background-color:#2F4F4F;color:white" /> 
+               <h:outputText value="#{ProjectStatusWebBean.selectedProjectWrapper.projectStatus}" style="background-color:cyan;color:navy;"/>
+             </h:panelGrid>
+             <h:panelGrid columns ="4" cellpadding="7">  
+               <h:outputText value="plannedStartDate:" style="background-color:#2F4F4F;color:white" />
+               <h:outputText value="#{ProjectStatusWebBean.selectedProjectWrapper.projectStartDate}" style="background-color:cyan;color:navy;"/>
+               <h:outputText value="plannedFinishDate:" style="background-color:#2F4F4F;color:white" />
+               <h:outputText value="#{ProjectStatusWebBean.selectedProjectWrapper.projectEndDate}" style="background-color:cyan;color:navy;"/>
+               <h:outputText value="plannedWorkHours:" style="background-color:#2F4F4F;color:white" />
+               <h:outputText value="#{ProjectStatusWebBean.selectedProjectWrapper.totalEstimatedWorkHours}" style="background-color:cyan;color:navy;"/>
+               <h:outputText value="actualWorkHoursSpent:" style="background-color:#2F4F4F;color:white" />
+               <h:outputText value="#{ProjectStatusWebBean.selectedProjectWrapper.totalActualWorkHoursSpent}" style="background-color:cyan;color:navy;"/>
+              </h:panelGrid>
+              <h:panelGrid columns ="4" cellpadding="7">
+               <h:outputText value="%Complete:" style="background-color:#2F4F4F;color:white" />
+               <h:outputText value="#{ProjectStatusWebBean.selectedProjectWrapper.percentageComplete}" style="background-color:cyan;color:navy;"/>
+               <h:outputText value="%WorkComplete:" style="background-color:#2F4F4F;color:white" />
+               <h:outputText value="#{ProjectStatusWebBean.selectedProjectWrapper.percentageWorkComplete}" style="background-color:cyan;color:navy;"/>
+               
+               <h:outputText value="Budget:" style="background-color:#2F4F4F;color:white" /> 
+               <h:outputText value="100000000$:" style="background-color:cyan;color:navy;"/> 
+               
+            </h:panelGrid> 
+            </p:outputPanel> 
+        </p:tab>  
+        
+        <p:tab title="Tasks">  
+            <h:panelGrid columns="2" cellpadding="0">  
+                   
+                <h:outputText value=" Project Tasks Status" />
+                
+               <ui:include src="my_wbs_tasks.xhtml"/> 
+                
+            </h:panelGrid>  
+        </p:tab>  
+        <p:tab title="Issues">  
+            <h:panelGrid columns="1" cellpadding="0">  
+                <p:graphicImage value="/images/godfather/godfather2.jpg" />  
+                <h:outputText value="Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather, parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream.  
+                In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy,  
+                killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows." />  
+            </h:panelGrid>  
+        </p:tab>  
+        <p:tab title="Risks">  
+            <h:panelGrid columns="1" cellpadding="0">  
+                <p:graphicImage value="/images/godfather/godfather3.jpg" />  
+                <h:outputText value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family.  
+                    Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate." />  
+            </h:panelGrid>  
+        </p:tab>
+        <p:tab title="Change Requests">  
+            <h:panelGrid columns="1" cellpadding="0">  
+                <p:graphicImage value="/images/godfather/godfather3.jpg" />  
+                <h:outputText value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family.  
+                    Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate." />  
+            </h:panelGrid>  
+        </p:tab>  
+        <p:tab title="Graphical Status">  
+            <h:panelGrid columns="1" cellpadding="0">  
+                <ui:include src="project_graphs.xhtml"/>   
+            </h:panelGrid>  
+        </p:tab>  
+        
+    </p:accordionPanel>  
+       	
+        <f:facet name="footer">
+            <h:outputText value="Footer" />
+        </f:facet>        	              
+	  </h:form>
+	</ui:define>
+	<ui:define name="footer"/>
+</ui:composition>
+</html>

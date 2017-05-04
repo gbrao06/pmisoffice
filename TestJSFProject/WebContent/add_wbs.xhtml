@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"> 
+	
+<ui:composition template="/WEB-INF/template/template.xhtml">
+	<ui:define name="header">
+	   
+	</ui:define>
+	
+	<ui:define name="content">
+	    <h:form>
+	    <p:panelGrid columns="4">
+        
+	    <div>
+           <h:outputText value="WBS: ASSIGN TASKS:" style="background-color:#2F4F4F;color:white"></h:outputText>   
+        </div>
+        </p:panelGrid>    
+	    <p:panelGrid columns="4">
+            
+            <h:outputText value="Select ProjectID :" ></h:outputText>
+	            
+	            <h:selectOneMenu value="#{TaskWebBean.project_id}">
+			    	<f:selectItems value="#{ProjectWebBean.getProjectListBigInts()}"  />
+			    	<f:ajax render="@form" execute="@form"></f:ajax>			    	
+				</h:selectOneMenu>
+			<h:commandButton type="submit" value="Refresh Tasks" style="color:#2F4F4F"
+                action="#{WbsWebBean.updateTasks()}">
+          	  <f:ajax render="@form" execute="@form"></f:ajax>
+          	  
+          	  </h:commandButton>
+			
+			<h:outputText value="#{TaskWebBean.project_id}" style="background-color:#2F4F4F;color:white"></h:outputText>
+	        	
+		</p:panelGrid>
+		
+		
+		<p:panelGrid id="tasklist" columns="3">	            
+	        <h:outputText value="Select Task :" ></h:outputText>
+            <p:selectOneMenu value="#{WbsWebBean.task_name}"> 
+            	<f:selectItems value="#{WbsWebBean.getTaskNamesByProjectId(TaskWebBean.project_id)}" />
+            	<f:ajax render="@form" execute="@form"></f:ajax>	    	
+			</p:selectOneMenu>
+			
+			<h:outputText value="#{WbsWebBean.task_name}" style="background-color:#2F4F4F;color:white;"></h:outputText>
+			 
+	 	</p:panelGrid>
+	 	
+		<p:panelGrid columns="2">	 
+		      
+			<h:outputText value="parent Task :"  style="color:navy"></h:outputText>
+	        <h:outputText value="#{WbsWebBean.getParentOfSelectedTask(TaskWebBean.project_id,WbsWebBean.task_name)}" >
+	        </h:outputText>
+	        
+			<h:outputText value="priority :"></h:outputText>
+	        <p:inputText value="#{WbsWebBean.priority}" ></p:inputText>
+	        
+	        <h:outputText value="Assign To :" style="color:navy;"></h:outputText>
+        
+            <p:selectOneMenu value="#{WbsWebBean.userId}">
+		    	<f:selectItems value="#{UserWebBean.getAllUserIDs()}" />
+			</p:selectOneMenu>
+			
+			<h:outputText value="TaskWbsId :"></h:outputText>
+	        <p:inputText value="#{WbsWebBean.wbs_id}" ></p:inputText>
+	        
+			<h:outputText value="Select Dates:" ></h:outputText>
+			
+		</p:panelGrid>
+		
+		<p:panelGrid columns="4">
+	     
+            <h:outputText value="start Estimate:"></h:outputText>
+	         <p:calendar value="#{WbsWebBean.startEstimate}" id="cal1" showButtonPanel="false"/>  
+			    
+            <h:outputText value="end Estimate:" ></h:outputText>
+            <p:calendar value="#{WbsWebBean.endEstimate}" id="cal2" showButtonPanel="false"/>  
+			      
+            <h:outputText value="start Actual:" ></h:outputText>
+			<p:calendar value="#{WbsWebBean.startActual}" id="cal3" showButtonPanel="false"/>  
+			     
+    		<h:outputText value="end Actual:"></h:outputText>
+            <p:calendar value="#{WbsWebBean.endActual}" id="cal4" showButtonPanel="false"/>  
+			
+			<h:outputText value="effortsPerDay"></h:outputText>
+            <h:inputText value="#{WbsWebBean.effortsPerDay}"/>
+			 
+			 <p:commandButton type="submit" process="@this" value="Add Task"  style="color:#2F4F4F;"
+                action="#{WbsWebBean.addWbsTask}">
+          	
+          	  </p:commandButton>
+			 </p:panelGrid>   
+			  		        
+	    </h:form>
+	
+	</ui:define>
+	<ui:define name="footer">
+	   
+	</ui:define>
+</ui:composition>
+</html>
